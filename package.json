@@ -1,0 +1,19 @@
+{
+  "name": "hyperliquid-client",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "cli": "bash scripts/ts-cli.sh",
+    "start": "yarn cli src/wsClient.ts"
+  },
+  "dependencies": {
+    "@nktkas/hyperliquid": "^0.23.1",
+    "@types/ws": "^8.18.1",
+    "tsx": "^4.20.3",
+    "viem": "^2.31.7"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.12"
+  }
+}
