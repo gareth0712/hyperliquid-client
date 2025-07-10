@@ -7,13 +7,13 @@
  */
 
 import WebSocket from 'ws';
-import * as fs from 'node:fs';
-import * as path from 'node:path';
+import fs from 'node:fs';
+import path from 'node:path';
 import { WebSocketMessage, WebData2Message, LowestValueEvent, AllMids, SubscriptionType, ClientMode, DataSaveMode, ConnectionInfo, ConnectionStats, SpotToken } from './types';
 
 // --- Config for Multi-Connection ---
 // Try to add more than 10 addresses to test the rate limit
-const USER_ADDRESSES = ['0x0000000000000000000000000000000000000000'];
+const USER_ADDRESSES = ['0xd400564f7e3c2502c1666e2d2fcbf8a9cace482d'];
 const RECONNECT_DELAY_MS = 5000; // 5 seconds
 const SAVE_CONTINUOUS_DATA = true;
 const SAVE_LOWEST_VALUE_EVENTS = true;
@@ -31,10 +31,14 @@ const SUBSCRIPTION_TYPES: SubscriptionType[] = ['webData2', 'allMids'];
 const ALLMIDS_DEX = undefined;
 
 // Mode Configuration
-const CLIENT_MODE: ClientMode = 'continuous';
+const CLIENT_MODE: ClientMode = 'oneOff';
 
 // Data Saving Configuration
 const DATA_SAVE_MODE: DataSaveMode = 'historical' as DataSaveMode;
+
+// OneOff Mode Configuration
+const ONEOFF_DURATION_MS = 60000; // Run for 60 seconds in oneOff mode
+const ONEOFF_MIN_MESSAGES_PER_USER = 5; // Minimum messages per user before allowing exit
 // -----------------------------------
 
 // --- State Management ---
@@ -51,6 +55,10 @@ let spotTokenMapping: Map<string, SpotToken> = new Map();
 let tokenToAllMidsMapping: Map<string, string> = new Map();
 
 const initializeTokenMapping = (): void => {
+  // Always setup basic token mappings for allMids, regardless of spotMeta.json
+  tokenToAllMidsMapping.set('USOL', 'SOL'); // USOL maps to SOL in allMids
+  tokenToAllMidsMapping.set('USDC', 'USDC'); // USDC stays as USDC but always $1
+
   const spotMetaPath = path.join(__dirname, '..', 'dataFromSubscription', currentDate, 'spotMeta.json');
 
   if (fs.existsSync(spotMetaPath)) {
@@ -72,22 +80,20 @@ const initializeTokenMapping = (): void => {
         });
       }
 
-      // Setup specific token mappings for allMids
-      tokenToAllMidsMapping.set('USOL', 'SOL'); // USOL maps to SOL in allMids
-      tokenToAllMidsMapping.set('USDC', 'USDC'); // USDC stays as USDC but always $1
-
       console.log(`📋 Loaded ${spotTokenMapping.size} spot tokens from spotMeta`);
-      console.log(
-        `🔗 Token mappings: ${Array.from(tokenToAllMidsMapping.entries())
-          .map(([k, v]) => `${k}->${v}`)
-          .join(', ')}`
-      );
     } catch (error) {
       console.error(`⚠️ Error loading spotMeta: ${error}`);
     }
   } else {
     console.log(`⚠️ spotMeta.json not found at ${spotMetaPath}`);
   }
+
+  // Always log the token mappings that are set up
+  console.log(
+    `🔗 Token mappings: ${Array.from(tokenToAllMidsMapping.entries())
+      .map(([k, v]) => `${k}->${v}`)
+      .join(', ')}`
+  );
 };
 
 const log = (message: string) => {
@@ -233,19 +239,39 @@ const getTokenPrice = (coin: string): string | null => {
 };
 
 const getSpotTokenPrice = (spotCoin: string): string | null => {
+  console.log(`🔍 Looking up price for spot token: ${spotCoin}`);
+  
   // Special case for USDC - always $1
   if (spotCoin === 'USDC') {
+    console.log(`   ✅ USDC: Using fixed price $1.00`);
     return '1.0';
   }
 
   // Get the mapped allMids key for this spot token
   const allMidsKey = tokenToAllMidsMapping.get(spotCoin);
   if (allMidsKey) {
-    return getTokenPrice(allMidsKey);
+    console.log(`   🔗 ${spotCoin} maps to ${allMidsKey} in allMids`);
+    const price = getTokenPrice(allMidsKey);
+    if (price) {
+      console.log(`   ✅ Found ${allMidsKey} price: $${price}`);
+      return price;
+    } else {
+      console.log(`   ❌ No price found for ${allMidsKey} in latestPrices`);
+      console.log(`   📊 Available prices: ${Array.from(latestPrices.keys()).slice(0, 10).join(', ')}${latestPrices.size > 10 ? '...' : ''}`);
+    }
+  } else {
+    console.log(`   ❌ No mapping found for ${spotCoin}`);
   }
 
   // Try direct mapping if no specific mapping exists
-  return getTokenPrice(spotCoin);
+  const directPrice = getTokenPrice(spotCoin);
+  if (directPrice) {
+    console.log(`   ✅ Found direct price for ${spotCoin}: $${directPrice}`);
+    return directPrice;
+  } else {
+    console.log(`   ❌ No direct price found for ${spotCoin}`);
+    return null;
+  }
 };
 
 const savePriceData = (): void => {
@@ -297,6 +323,10 @@ class MultiConnectionHyperLiquidClient {
   // Performance tracking
   private totalMessagesReceived: number = 0;
   private connectionStartTime: number = Date.now();
+
+  // OneOff mode management
+  private oneOffTimeout: NodeJS.Timeout | null = null;
+  private oneOffExitConditionsMet: boolean = false;
 
   constructor(userAddresses: string[], clientMode: ClientMode = 'continuous', dataSaveMode: DataSaveMode = 'all') {
     this.clientMode = clientMode;
@@ -485,6 +515,11 @@ class MultiConnectionHyperLiquidClient {
     // Start health check monitoring
     this.startHealthCheck();
 
+    // Setup oneOff mode timeout if applicable
+    if (this.clientMode === 'oneOff') {
+      this.setupOneOffMode();
+    }
+
     // Connect all connections with staggered timing
     const connectionPromises: Promise<void>[] = [];
     let delay = 0;
@@ -630,6 +665,11 @@ class MultiConnectionHyperLiquidClient {
       if (this.totalMessagesReceived % 100 === 0) {
         this.logConnectionStatus();
       }
+
+      // Check oneOff exit conditions after processing message
+      if (this.clientMode === 'oneOff') {
+        this.checkOneOffExitConditions();
+      }
     } catch (error) {
       console.error(`❌ Error parsing message from ${connectionId}:`, error);
     }
@@ -664,6 +704,69 @@ class MultiConnectionHyperLiquidClient {
     this.healthCheckInterval = setInterval(() => {
       this.performHealthCheck();
     }, HEALTH_CHECK_INTERVAL);
+  }
+
+  private setupOneOffMode(): void {
+    console.log(`⏱️ OneOff mode: Running for ${ONEOFF_DURATION_MS / 1000} seconds`);
+    console.log(`📊 OneOff mode: Collecting minimum ${ONEOFF_MIN_MESSAGES_PER_USER} messages per user`);
+
+    // Set maximum runtime timeout
+    this.oneOffTimeout = setTimeout(() => {
+      console.log(`⏰ OneOff mode: Maximum runtime reached (${ONEOFF_DURATION_MS / 1000}s)`);
+      this.exitOneOffMode();
+    }, ONEOFF_DURATION_MS);
+  }
+
+  private checkOneOffExitConditions(): boolean {
+    if (this.clientMode !== 'oneOff' || this.oneOffExitConditionsMet) {
+      return false;
+    }
+
+    // Check if all users have received minimum messages
+    let allUsersHaveMinMessages = true;
+    for (const [userAddress] of this.userExistingData) {
+      const userMessages = this.userExistingData.get(userAddress) || [];
+      if (userMessages.length < ONEOFF_MIN_MESSAGES_PER_USER) {
+        allUsersHaveMinMessages = false;
+        break;
+      }
+    }
+
+    if (allUsersHaveMinMessages) {
+      console.log(`✅ OneOff mode: All users have received minimum ${ONEOFF_MIN_MESSAGES_PER_USER} messages`);
+      this.exitOneOffMode();
+      return true;
+    }
+
+    return false;
+  }
+
+  private exitOneOffMode(): void {
+    if (this.oneOffExitConditionsMet) {
+      return; // Already exiting
+    }
+
+    this.oneOffExitConditionsMet = true;
+
+    console.log(`\n🏁 OneOff mode: Exiting after collecting data...`);
+    
+    // Clear timeout if it exists
+    if (this.oneOffTimeout) {
+      clearTimeout(this.oneOffTimeout);
+      this.oneOffTimeout = null;
+    }
+
+    // Show final status
+    const status = this.getDetailedStatus();
+    console.log(`📊 Final Status - Messages: ${status.messagesReceived}, Users: ${status.totalUsers}`);
+    
+    // Disconnect and exit
+    this.disconnect();
+    
+    setTimeout(() => {
+      console.log(`👋 OneOff mode: Complete. Exiting process.`);
+      process.exit(0);
+    }, 1000); // Give time for final logs
   }
 
   private performHealthCheck(): void {
@@ -1052,7 +1155,20 @@ class MultiConnectionHyperLiquidClient {
     if (currentTime - this.lastAllMidsUpdate >= this.allMidsUpdateInterval) {
       updatePriceData(allMidsData);
       this.lastAllMidsUpdate = currentTime;
-      console.log(`💰 Updated price data (${Object.keys(allMidsData.mids).length} tokens) - throttled to ~5s intervals`);
+      
+      // Log relevant token prices for debugging
+      const relevantTokens = ['SOL', 'ETH', 'BTC', 'USDC'];
+      const relevantPrices = relevantTokens
+        .map(token => {
+          const price = allMidsData.mids[token];
+          return price ? `${token}: $${price}` : null;
+        })
+        .filter(Boolean);
+      
+      console.log(`💰 Updated price data (${Object.keys(allMidsData.mids).length} tokens total)`);
+      if (relevantPrices.length > 0) {
+        console.log(`   📊 Key prices: ${relevantPrices.join(', ')}`);
+      }
     }
     // Silently ignore high-frequency allMids updates
   }
@@ -1064,6 +1180,12 @@ class MultiConnectionHyperLiquidClient {
     if (this.healthCheckInterval) {
       clearInterval(this.healthCheckInterval);
       this.healthCheckInterval = null;
+    }
+
+    // Stop oneOff timeout
+    if (this.oneOffTimeout) {
+      clearTimeout(this.oneOffTimeout);
+      this.oneOffTimeout = null;
     }
 
     // Disconnect all WebSocket connections
