@@ -1,3 +1,42 @@
+export type SubscriptionType = 'webData2' | 'allMids';
+export type ClientMode = 'continuous' | 'oneOff';
+export type DataSaveMode = 'all' | 'spotAndPerps' | 'historical';
+
+// --- Connection Management ---
+export interface ConnectionInfo {
+  id: string;
+  ws: WebSocket | null;
+  userAddresses: string[];
+  isConnected: boolean;
+  reconnectAttempts: number;
+  lastHeartbeat: number;
+  subscriptionTypes: SubscriptionType[];
+}
+
+export interface ConnectionStats {
+  totalConnections: number;
+  activeConnections: number;
+  totalUsers: number;
+  messagesReceived: number;
+  lastUpdate: string;
+  connectionDetails: Map<
+    string,
+    {
+      users: string[];
+      status: 'connected' | 'disconnected' | 'reconnecting';
+      messagesCount: number;
+    }
+  >;
+}
+
+// --- Token Mapping ---
+export interface SpotToken {
+  name: string;
+  index: number;
+  tokenId: string;
+  fullName?: string;
+}
+
 export interface WsTrade {
   coin: string;
   side: string;
