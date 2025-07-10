@@ -1,7 +1,7 @@
 [
   {
-    "totalAccountValue": "50.230678",
-    "clearinghouseState": "30.310678",
+    "totalAccountValue": "51.33386935275001",
+    "clearinghouseState": "30.313828",
     "spotBalance": [
       {
         "coin": "USDC",
@@ -20,10 +20,10 @@
     ],
     "pricesUsed": {
       "USDC": "1.00",
-      "USOL": "entryNtl:10.92044"
+      "USOL": "158.275"
     },
-    "serverTime": 1752139496308,
-    "localTime": "20250710T17:24:56Z+8",
+    "serverTime": 1752140262525,
+    "localTime": "20250710T17:37:42Z+8",
     "priceSource": "currentPrices"
   }
 ]
