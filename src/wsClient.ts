@@ -14,8 +14,11 @@ import { WebSocketMessage, WebData2Message, LowestValueEvent, AllMids, Subscript
 // --- Config for Multi-Connection ---
 // Try to add more than 10 addresses to test the rate limit
 // Testing rate limit with same funded account 11 times
+const HOST_URL = 'wss://api.hyperliquid.xyz';
+const PORT_NO = '';
 const USER_ADDRESSES = [
-  ''
+  '0xD400564F7e3c2502c1666e2D2FcbF8a9cAcE482d',
+
 ];
 const RECONNECT_DELAY_MS = 5000; // 5 seconds
 const SAVE_CONTINUOUS_DATA = true;
@@ -29,7 +32,7 @@ const MAX_RECONNECT_ATTEMPTS = 5;
 const HEALTH_CHECK_INTERVAL = 30000; // Health check every 30 seconds
 
 // Subscription Configuration
-// webData2 - Getting the latest account value (Perp) and spot balances
+// webData2 - Getting the latest account value (Perp) and spot balances of specific user
 // allMids - Getting the latest prices for all tokens
 const SUBSCRIPTION_TYPES: SubscriptionType[] = ['webData2', 'allMids'];
 const ALLMIDS_DEX = undefined;
@@ -552,7 +555,7 @@ class MultiConnectionHyperLiquidClient {
 
     console.log(`🔌 Connecting ${connectionId} for users: ${connectionInfo.userAddresses.join(', ')}`);
 
-    connectionInfo.ws = new WebSocket('wss://api.hyperliquid.xyz/ws');
+    connectionInfo.ws = new WebSocket(`${HOST_URL}${PORT_NO ? `:${PORT_NO}` : ''}/ws`);
 
     connectionInfo.ws.on('open', () => {
       console.log(`✅ ${connectionId} connected successfully`);

@@ -279,6 +279,6 @@ The following command is supposed to run a non-validator node for Mainnet and ma
 # 3. Makes the server accessible only on the local machine (localhost) on port 8081.
 # 4. Runs the entire process in the background.
 
-./hl-node --chain Mainnet run-node --info-server-host="127.0.0.1" --info-server-port=8081 &
+./hl-node run-non-validator --chain Mainnet --info-server-host="127.0.0.1" --info-server-port=8081 &
 ```
 
