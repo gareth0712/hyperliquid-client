@@ -37,8 +37,8 @@ const CLIENT_MODE: ClientMode = 'oneOff';
 const DATA_SAVE_MODE: DataSaveMode = 'historical' as DataSaveMode;
 
 // OneOff Mode Configuration
-const ONEOFF_DURATION_MS = 60000; // Run for 60 seconds in oneOff mode
-const ONEOFF_MIN_MESSAGES_PER_USER = 5; // Minimum messages per user before allowing exit
+const ONEOFF_DURATION_MS = 1000; // Run for 1 second in oneOff mode
+const ONEOFF_MIN_MESSAGES_PER_USER = 1; // Minimum messages per user before allowing exit
 // -----------------------------------
 
 // --- State Management ---
@@ -59,7 +59,7 @@ const initializeTokenMapping = (): void => {
   tokenToAllMidsMapping.set('USOL', 'SOL'); // USOL maps to SOL in allMids
   tokenToAllMidsMapping.set('USDC', 'USDC'); // USDC stays as USDC but always $1
 
-  const spotMetaPath = path.join(__dirname, '..', 'dataFromSubscription', currentDate, 'spotMeta.json');
+  const spotMetaPath = path.join(__dirname, '..', 'data', 'spotMeta.json');
 
   if (fs.existsSync(spotMetaPath)) {
     try {
@@ -1234,7 +1234,7 @@ class MultiConnectionHyperLiquidClient {
 }
 
 const main = async () => {
-  console.log('🚀 Starting Enhanced Multi-Connection HyperLiquid WebSocket Client');
+  console.log('🚀 Starting Multi-Connection HyperLiquid WebSocket Client');
 
   const client = new MultiConnectionHyperLiquidClient(USER_ADDRESSES, CLIENT_MODE, DATA_SAVE_MODE);
 
