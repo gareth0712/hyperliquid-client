@@ -13,13 +13,17 @@ import { WebSocketMessage, WebData2Message, LowestValueEvent, AllMids, Subscript
 
 // --- Config for Multi-Connection ---
 // Try to add more than 10 addresses to test the rate limit
-const USER_ADDRESSES = [''];
+// Testing rate limit with same funded account 11 times
+const USER_ADDRESSES = [
+  ''
+];
 const RECONNECT_DELAY_MS = 5000; // 5 seconds
 const SAVE_CONTINUOUS_DATA = true;
 const SAVE_LOWEST_VALUE_EVENTS = true;
 
 // Multi-Connection Configuration
-const MAX_USERS_PER_CONNECTION = 3; // Maximum users per WebSocket connection
+// 1. Rate limit testing - 1 user per websocket connection -> 11 users to test the rate limit `Maximum of 10 unique users across user-specific websocket subscriptions`
+const MAX_USERS_PER_CONNECTION = 1; // Maximum users per WebSocket connection (1 for rate limit testing)
 const CONNECTION_STAGGER_DELAY = 1000; // Delay between connection attempts (ms)
 const MAX_RECONNECT_ATTEMPTS = 5;
 const HEALTH_CHECK_INTERVAL = 30000; // Health check every 30 seconds
@@ -31,14 +35,14 @@ const SUBSCRIPTION_TYPES: SubscriptionType[] = ['webData2', 'allMids'];
 const ALLMIDS_DEX = undefined;
 
 // Mode Configuration
-const CLIENT_MODE: ClientMode = 'oneOff';
+const CLIENT_MODE: ClientMode = 'continuous';
 
 // Data Saving Configuration
 const DATA_SAVE_MODE: DataSaveMode = 'historical' as DataSaveMode;
 
 // OneOff Mode Configuration
-const ONEOFF_DURATION_MS = 15000; // Run for 15 seconds in oneOff mode
-const ONEOFF_MIN_MESSAGES_PER_USER = 3; // Minimum messages per user before allowing exit
+const ONEOFF_DURATION_MS = 10000; // Run for 10 seconds in oneOff mode  
+const ONEOFF_MIN_MESSAGES_PER_USER = 2; // Minimum messages per user before allowing exit
 // -----------------------------------
 
 // --- State Management ---
