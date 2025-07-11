@@ -13,7 +13,7 @@ import { WebSocketMessage, WebData2Message, LowestValueEvent, AllMids, Subscript
 
 // --- Config for Multi-Connection ---
 // Try to add more than 10 addresses to test the rate limit
-const USER_ADDRESSES = ['0xd400564f7e3c2502c1666e2d2fcbf8a9cace482d'];
+const USER_ADDRESSES = [''];
 const RECONNECT_DELAY_MS = 5000; // 5 seconds
 const SAVE_CONTINUOUS_DATA = true;
 const SAVE_LOWEST_VALUE_EVENTS = true;
@@ -37,8 +37,8 @@ const CLIENT_MODE: ClientMode = 'oneOff';
 const DATA_SAVE_MODE: DataSaveMode = 'historical' as DataSaveMode;
 
 // OneOff Mode Configuration
-const ONEOFF_DURATION_MS = 1000; // Run for 1 second in oneOff mode
-const ONEOFF_MIN_MESSAGES_PER_USER = 1; // Minimum messages per user before allowing exit
+const ONEOFF_DURATION_MS = 15000; // Run for 15 seconds in oneOff mode
+const ONEOFF_MIN_MESSAGES_PER_USER = 3; // Minimum messages per user before allowing exit
 // -----------------------------------
 
 // --- State Management ---
@@ -1013,8 +1013,8 @@ class MultiConnectionHyperLiquidClient {
     const clearinghouseValue = data.clearinghouseState?.marginSummary?.accountValue || '0';
     const spotBalances = data.spotState?.balances || [];
 
-    // Use current prices if allMids is subscribed and we have price data
-    const useCurrentPrices = SUBSCRIPTION_TYPES.includes('allMids') && latestPrices.size > 0;
+    // Always try to use current prices when allMids is subscribed
+    const useCurrentPrices = SUBSCRIPTION_TYPES.includes('allMids');
     let totalAccountValue: number;
     let pricesUsed: Record<string, string> = {};
 
