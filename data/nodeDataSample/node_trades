@@ -1,8 +1,200 @@
-{"coin":"BTC","side":"B","time":"2025-07-16T10:46:43.184115013","px":"118992.0","sz":"0.01037","hash":"0x6835c5de09891d41ee7604279bf6b50202f20051a22ad05c645878752f9f1698","trade_dir_override":"Na","side_info":[{"user":"0xecb63caa47c7c4e77f60f1ce858cf28dc2b82b00","start_pos":"-669.47734","oid":114941371504,"twap_id":null,"cloid":"0x90005ff26569f26df2560e26e2df0240"},{"user":"0xef5fdcefdb38803a654ee9f3539bed8058443d99","start_pos":"-4.64665","oid":114941345988,"twap_id":null,"cloid":"0x00000000000000000002171757459143"}]}
-{"coin":"BTC","side":"A","time":"2025-07-16T10:46:43.184115013","px":"118992.0","sz":"0.02171","hash":"0xa386f2191e4a295a5ee204279bf6b50202f400f42cbef7b1e0540b9d23bbfc39","trade_dir_override":"Na","side_info":[{"user":"0xecb63caa47c7c4e77f60f1ce858cf28dc2b82b00","start_pos":"-669.46697","oid":114941371504,"twap_id":null,"cloid":"0x90005ff26569f26df2560e26e2df0240"},{"user":"0xce2878fa63563ea24b60ac8cecf55cd4f2bb1a28","start_pos":"0.02171","oid":114941371506,"twap_id":null,"cloid":null}]}
-{"coin":"kBONK","side":"B","time":"2025-07-16T10:46:43.184115013","px":"0.03308","sz":"19875.0","hash":"0x15fc4e0923284727291904279bf6b50202f600ba8ed43ddd9064444e3129f567","trade_dir_override":"Na","side_info":[{"user":"0x2c24406d381c537cd5dc773315a3c83378eb7cbe","start_pos":"-32580000.0","oid":114941371508,"twap_id":null,"cloid":null},{"user":"0x023a3d058020fb76cca98f01b3c48c8938a22355","start_pos":"-3634001.0","oid":114941365953,"twap_id":null,"cloid":"0x00000000000003725505923170855679"}]}
-{"coin":"kBONK","side":"B","time":"2025-07-16T10:46:43.184115013","px":"0.033082","sz":"10125.0","hash":"0x15fc4e0923284727291904279bf6b50202f600ba8ed43ddd9064444e3129f567","trade_dir_override":"Na","side_info":[{"user":"0x2c24406d381c537cd5dc773315a3c83378eb7cbe","start_pos":"-32560125.0","oid":114941371508,"twap_id":null,"cloid":null},{"user":"0x8050706eb79e2e1128a3a96b50ece6e74e1428de","start_pos":"0.0","oid":114941125258,"twap_id":null,"cloid":"0x791a0d6a5428483588962f3696c16ac4"}]}
-{"coin":"FARTCOIN","side":"B","time":"2025-07-16T10:46:43.408586263","px":"1.2218","sz":"54.9","hash":"0x4fb4bf8d6a915706343c04279bf6b702016400f09b0a4b94e86601410c24a925","trade_dir_override":"Na","side_info":[{"user":"0x3cec14bb60f03d92ca3deaa94c6f573846eda010","start_pos":"14000.0","oid":114941372467,"twap_id":null,"cloid":null},{"user":"0x720660633f4e364d9c7047631b59bdb9db7544f1","start_pos":"27940.3","oid":114941369164,"twap_id":null,"cloid":"0xb4291ee16d4847689333392374555357"}]}
-{"coin":"FARTCOIN","side":"B","time":"2025-07-16T10:46:43.408586263","px":"1.2222","sz":"945.1","hash":"0x4fb4bf8d6a915706343c04279bf6b702016400f09b0a4b94e86601410c24a925","trade_dir_override":"Na","side_info":[{"user":"0x3cec14bb60f03d92ca3deaa94c6f573846eda010","start_pos":"14054.9","oid":114941372467,"twap_id":null,"cloid":null},{"user":"0xaf9f722a676230cc44045efe26fe9a85801ca4fa","start_pos":"30385.1","oid":114941340916,"twap_id":null,"cloid":"0x00000000000004130086843950305441"}]}
-{"coin":"@162","side":"B","time":"2025-07-16T10:46:43.408586263","px":"1.2201","sz":"25.5","hash":"0x46ecd0645f4d9fd4688704279bf6b702016a00bbfb23edb4557da5f0dd207066","trade_dir_override":"Na","side_info":[{"user":"0x25bdd0a95d95319033360a2989219c697fc8a7d9","start_pos":"363.139445","oid":114941372473,"twap_id":null,"cloid":null},{"user":"0x09ab3d733401e2fd4e461b491a5f9a2d049f6ed6","start_pos":"3956.125111","oid":114940037151,"twap_id":null,"cloid":"0xb578b000000000000000114896720325"}]}
-{"coin":"FARTCOIN","side":"B","time":"2025-07-16T10:46:43.515814321","px":"1.2222","sz":"8199.4","hash":"0x8b1076ea360cb7f572aa04279bf6b802020c00aed875329607f4105603d40c5d","trade_dir_override":"Na","side_info":[{"user":"0x19c51bf584b70d4bf70585125e929f7e0387b723","start_pos":"0.0","oid":114941373144,"twap_id":null,"cloid":null},{"user":"0xaf9f722a676230cc44045efe26fe9a85801ca4fa","start_pos":"29440.0","oid":114941340916,"twap_id":null,"cloid":"0x00000000000004130086843950305441"}]}
+{
+  "coin": "BTC",
+  "side": "B",
+  "time": "2025-07-16T10:46:43.184115013",
+  "px": "118992.0",
+  "sz": "0.01037",
+  "hash": "0x6835c5de09891d41ee7604279bf6b50202f20051a22ad05c645878752f9f1698",
+  "trade_dir_override": "Na",
+  "side_info": [
+    {
+      "user": "0xecb63caa47c7c4e77f60f1ce858cf28dc2b82b00",
+      "start_pos": "-669.47734",
+      "oid": 114941371504,
+      "twap_id": null,
+      "cloid": "0x90005ff26569f26df2560e26e2df0240"
+    },
+    {
+      "user": "0xef5fdcefdb38803a654ee9f3539bed8058443d99",
+      "start_pos": "-4.64665",
+      "oid": 114941345988,
+      "twap_id": null,
+      "cloid": "0x00000000000000000002171757459143"
+    }
+  ]
+}
+{
+  "coin": "BTC",
+  "side": "A",
+  "time": "2025-07-16T10:46:43.184115013",
+  "px": "118992.0",
+  "sz": "0.02171",
+  "hash": "0xa386f2191e4a295a5ee204279bf6b50202f400f42cbef7b1e0540b9d23bbfc39",
+  "trade_dir_override": "Na",
+  "side_info": [
+    {
+      "user": "0xecb63caa47c7c4e77f60f1ce858cf28dc2b82b00",
+      "start_pos": "-669.46697",
+      "oid": 114941371504,
+      "twap_id": null,
+      "cloid": "0x90005ff26569f26df2560e26e2df0240"
+    },
+    {
+      "user": "0xce2878fa63563ea24b60ac8cecf55cd4f2bb1a28",
+      "start_pos": "0.02171",
+      "oid": 114941371506,
+      "twap_id": null,
+      "cloid": null
+    }
+  ]
+}
+{
+  "coin": "kBONK",
+  "side": "B",
+  "time": "2025-07-16T10:46:43.184115013",
+  "px": "0.03308",
+  "sz": "19875.0",
+  "hash": "0x15fc4e0923284727291904279bf6b50202f600ba8ed43ddd9064444e3129f567",
+  "trade_dir_override": "Na",
+  "side_info": [
+    {
+      "user": "0x2c24406d381c537cd5dc773315a3c83378eb7cbe",
+      "start_pos": "-32580000.0",
+      "oid": 114941371508,
+      "twap_id": null,
+      "cloid": null
+    },
+    {
+      "user": "0x023a3d058020fb76cca98f01b3c48c8938a22355",
+      "start_pos": "-3634001.0",
+      "oid": 114941365953,
+      "twap_id": null,
+      "cloid": "0x00000000000003725505923170855679"
+    }
+  ]
+}
+{
+  "coin": "kBONK",
+  "side": "B",
+  "time": "2025-07-16T10:46:43.184115013",
+  "px": "0.033082",
+  "sz": "10125.0",
+  "hash": "0x15fc4e0923284727291904279bf6b50202f600ba8ed43ddd9064444e3129f567",
+  "trade_dir_override": "Na",
+  "side_info": [
+    {
+      "user": "0x2c24406d381c537cd5dc773315a3c83378eb7cbe",
+      "start_pos": "-32560125.0",
+      "oid": 114941371508,
+      "twap_id": null,
+      "cloid": null
+    },
+    {
+      "user": "0x8050706eb79e2e1128a3a96b50ece6e74e1428de",
+      "start_pos": "0.0",
+      "oid": 114941125258,
+      "twap_id": null,
+      "cloid": "0x791a0d6a5428483588962f3696c16ac4"
+    }
+  ]
+}
+{
+  "coin": "FARTCOIN",
+  "side": "B",
+  "time": "2025-07-16T10:46:43.408586263",
+  "px": "1.2218",
+  "sz": "54.9",
+  "hash": "0x4fb4bf8d6a915706343c04279bf6b702016400f09b0a4b94e86601410c24a925",
+  "trade_dir_override": "Na",
+  "side_info": [
+    {
+      "user": "0x3cec14bb60f03d92ca3deaa94c6f573846eda010",
+      "start_pos": "14000.0",
+      "oid": 114941372467,
+      "twap_id": null,
+      "cloid": null
+    },
+    {
+      "user": "0x720660633f4e364d9c7047631b59bdb9db7544f1",
+      "start_pos": "27940.3",
+      "oid": 114941369164,
+      "twap_id": null,
+      "cloid": "0xb4291ee16d4847689333392374555357"
+    }
+  ]
+}
+{
+  "coin": "FARTCOIN",
+  "side": "B",
+  "time": "2025-07-16T10:46:43.408586263",
+  "px": "1.2222",
+  "sz": "945.1",
+  "hash": "0x4fb4bf8d6a915706343c04279bf6b702016400f09b0a4b94e86601410c24a925",
+  "trade_dir_override": "Na",
+  "side_info": [
+    {
+      "user": "0x3cec14bb60f03d92ca3deaa94c6f573846eda010",
+      "start_pos": "14054.9",
+      "oid": 114941372467,
+      "twap_id": null,
+      "cloid": null
+    },
+    {
+      "user": "0xaf9f722a676230cc44045efe26fe9a85801ca4fa",
+      "start_pos": "30385.1",
+      "oid": 114941340916,
+      "twap_id": null,
+      "cloid": "0x00000000000004130086843950305441"
+    }
+  ]
+}
+{
+  "coin": "@162",
+  "side": "B",
+  "time": "2025-07-16T10:46:43.408586263",
+  "px": "1.2201",
+  "sz": "25.5",
+  "hash": "0x46ecd0645f4d9fd4688704279bf6b702016a00bbfb23edb4557da5f0dd207066",
+  "trade_dir_override": "Na",
+  "side_info": [
+    {
+      "user": "0x25bdd0a95d95319033360a2989219c697fc8a7d9",
+      "start_pos": "363.139445",
+      "oid": 114941372473,
+      "twap_id": null,
+      "cloid": null
+    },
+    {
+      "user": "0x09ab3d733401e2fd4e461b491a5f9a2d049f6ed6",
+      "start_pos": "3956.125111",
+      "oid": 114940037151,
+      "twap_id": null,
+      "cloid": "0xb578b000000000000000114896720325"
+    }
+  ]
+}
+{
+  "coin": "FARTCOIN",
+  "side": "B",
+  "time": "2025-07-16T10:46:43.515814321",
+  "px": "1.2222",
+  "sz": "8199.4",
+  "hash": "0x8b1076ea360cb7f572aa04279bf6b802020c00aed875329607f4105603d40c5d",
+  "trade_dir_override": "Na",
+  "side_info": [
+    {
+      "user": "0x19c51bf584b70d4bf70585125e929f7e0387b723",
+      "start_pos": "0.0",
+      "oid": 114941373144,
+      "twap_id": null,
+      "cloid": null
+    },
+    {
+      "user": "0xaf9f722a676230cc44045efe26fe9a85801ca4fa",
+      "start_pos": "29440.0",
+      "oid": 114941340916,
+      "twap_id": null,
+      "cloid": "0x00000000000004130086843950305441"
+    }
+  ]
+}

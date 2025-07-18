@@ -1,6 +1,118 @@
-["0x97372ba157f00034cf4c38791d3d828a3194fc34",{"coin":"@107","px":"47.989","sz":"0.56","side":"B","time":1752671760533,"startPosition":"1.67887105","dir":"Buy","closedPnl":"0.0","hash":"0xf4dd43c8a10f7ce9cc4204279dc47c02023d007e54db4698ae0fe27134e7a84d","oid":115002975709,"crossed":true,"fee":"0.00037631","tid":775871597375110,"feeToken":"HYPE"}]
-["0x1c1c270b573d55b68b3d14722b5d5d401511bed0",{"coin":"@107","px":"47.989","sz":"0.56","side":"A","time":1752671760533,"startPosition":"542.71287285","dir":"Sell","closedPnl":"-0.01077462","hash":"0xf4dd43c8a10f7ce9cc4204279dc47c02023d007e54db4698ae0fe27134e7a84d","oid":115002958025,"crossed":false,"fee":"-0.00001119","tid":775871597375110,"cloid":"0x96ca18a15aba4003444ad56065b59df4","feeToken":"HYPE"}]
-["0xbb475febf78b528f4f0d4ae1a12541406565199c",{"coin":"BTC","px":"118802.0","sz":"0.0008","side":"B","time":1752671760585,"startPosition":"-54.11027","dir":"Close Short","closedPnl":"-0.66096","hash":"0x3189c77255b406f9b9b204279dc47d0202ed00e584c89d6ac4cadae128e0ce28","oid":115002944708,"crossed":false,"fee":"-0.0019","tid":525842706619552,"cloid":"0x00000000000000001852bab21fa2e2a7","feeToken":"USDC"}]
-["0x0e893d9769c3210c73843230dd250eecbc8fa302",{"coin":"BTC","px":"118802.0","sz":"0.0008","side":"A","time":1752671760585,"startPosition":"0.0008","dir":"Close Long","closedPnl":"0.0168","hash":"0x3189c77255b406f9b9b204279dc47d0202ed00e584c89d6ac4cadae128e0ce28","oid":115002976698,"crossed":true,"fee":"0.036951","tid":525842706619552,"feeToken":"USDC"}]
-["0xf060e33cfa0727a224a184622606213e8f4e6a6f",{"coin":"SOL","px":"166.88","sz":"5.58","side":"B","time":1752671760585,"startPosition":"-202.05","dir":"Close Short","closedPnl":"0.378324","hash":"0xa4c41f50950c21b1de4d04279dc47d02030b008d98a0d75acaa8eddb562d7317","oid":115002957916,"crossed":false,"fee":"-0.027935","tid":260654661369525,"cloid":"0x00000000000853ba00002254cf751c7e","feeToken":"USDC"}]
-["0x162cc7c861ebd0c06b3d72319201150482518185",{"coin":"SOL","px":"166.88","sz":"5.58","side":"A","time":1752671760585,"startPosition":"23653.43","dir":"Close Long","closedPnl":"1.655586","hash":"0xa4c41f50950c21b1de4d04279dc47d02030b008d98a0d75acaa8eddb562d7317","oid":115002976728,"crossed":true,"fee":"0.134091","tid":260654661369525,"cloid":"0x00000000000000000b56a2140e8af4dd","feeToken":"USDC"}]
+[
+  "0x97372ba157f00034cf4c38791d3d828a3194fc34",
+  {
+    "coin": "@107",
+    "px": "47.989",
+    "sz": "0.56",
+    "side": "B",
+    "time": 1752671760533,
+    "startPosition": "1.67887105",
+    "dir": "Buy",
+    "closedPnl": "0.0",
+    "hash": "0xf4dd43c8a10f7ce9cc4204279dc47c02023d007e54db4698ae0fe27134e7a84d",
+    "oid": 115002975709,
+    "crossed": true,
+    "fee": "0.00037631",
+    "tid": 775871597375110,
+    "feeToken": "HYPE"
+  }
+]
+[
+  "0x1c1c270b573d55b68b3d14722b5d5d401511bed0",
+  {
+    "coin": "@107",
+    "px": "47.989",
+    "sz": "0.56",
+    "side": "A",
+    "time": 1752671760533,
+    "startPosition": "542.71287285",
+    "dir": "Sell",
+    "closedPnl": "-0.01077462",
+    "hash": "0xf4dd43c8a10f7ce9cc4204279dc47c02023d007e54db4698ae0fe27134e7a84d",
+    "oid": 115002958025,
+    "crossed": false,
+    "fee": "-0.00001119",
+    "tid": 775871597375110,
+    "cloid": "0x96ca18a15aba4003444ad56065b59df4",
+    "feeToken": "HYPE"
+  }
+]
+[
+  "0xbb475febf78b528f4f0d4ae1a12541406565199c",
+  {
+    "coin": "BTC",
+    "px": "118802.0",
+    "sz": "0.0008",
+    "side": "B",
+    "time": 1752671760585,
+    "startPosition": "-54.11027",
+    "dir": "Close Short",
+    "closedPnl": "-0.66096",
+    "hash": "0x3189c77255b406f9b9b204279dc47d0202ed00e584c89d6ac4cadae128e0ce28",
+    "oid": 115002944708,
+    "crossed": false,
+    "fee": "-0.0019",
+    "tid": 525842706619552,
+    "cloid": "0x00000000000000001852bab21fa2e2a7",
+    "feeToken": "USDC"
+  }
+]
+[
+  "0x0e893d9769c3210c73843230dd250eecbc8fa302",
+  {
+    "coin": "BTC",
+    "px": "118802.0",
+    "sz": "0.0008",
+    "side": "A",
+    "time": 1752671760585,
+    "startPosition": "0.0008",
+    "dir": "Close Long",
+    "closedPnl": "0.0168",
+    "hash": "0x3189c77255b406f9b9b204279dc47d0202ed00e584c89d6ac4cadae128e0ce28",
+    "oid": 115002976698,
+    "crossed": true,
+    "fee": "0.036951",
+    "tid": 525842706619552,
+    "feeToken": "USDC"
+  }
+]
+[
+  "0xf060e33cfa0727a224a184622606213e8f4e6a6f",
+  {
+    "coin": "SOL",
+    "px": "166.88",
+    "sz": "5.58",
+    "side": "B",
+    "time": 1752671760585,
+    "startPosition": "-202.05",
+    "dir": "Close Short",
+    "closedPnl": "0.378324",
+    "hash": "0xa4c41f50950c21b1de4d04279dc47d02030b008d98a0d75acaa8eddb562d7317",
+    "oid": 115002957916,
+    "crossed": false,
+    "fee": "-0.027935",
+    "tid": 260654661369525,
+    "cloid": "0x00000000000853ba00002254cf751c7e",
+    "feeToken": "USDC"
+  }
+]
+[
+  "0x162cc7c861ebd0c06b3d72319201150482518185",
+  {
+    "coin": "SOL",
+    "px": "166.88",
+    "sz": "5.58",
+    "side": "A",
+    "time": 1752671760585,
+    "startPosition": "23653.43",
+    "dir": "Close Long",
+    "closedPnl": "1.655586",
+    "hash": "0xa4c41f50950c21b1de4d04279dc47d02030b008d98a0d75acaa8eddb562d7317",
+    "oid": 115002976728,
+    "crossed": true,
+    "fee": "0.134091",
+    "tid": 260654661369525,
+    "cloid": "0x00000000000000000b56a2140e8af4dd",
+    "feeToken": "USDC"
+  }
+]
