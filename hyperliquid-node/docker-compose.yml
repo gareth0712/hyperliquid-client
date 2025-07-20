@@ -1,0 +1,25 @@
+version: '3'
+name: hyperliquid
+services:
+  hyperliquid-node:
+    image: gcr.io/release-builds/hyperliquid-node:1.0.0
+    restart: unless-stopped
+    ports:
+      - "4000-4010:4000-4010"
+      - "3999:3001"
+    volumes:
+      - ./override_gossip_config.json:/home/hluser/override_gossip_config.json
+      - hl-data:/home/hluser/hl/data
+      # - ../data/hyperliquidNodeDataSample:/home/hluser/tmp/sample
+    entrypoint: ["/home/hluser/hl-visor", "run-non-validator", "--write-fills", "--write-misc-events", "--serve-info", "--replica-cmds-style", "recent-actions"]
+
+  hyperliquid-pruner:
+    image: gcr.io/release-builds/hyperliquid-pruner:1.0.0
+    restart: unless-stopped
+    volumes:
+      - hl-data:/home/hluser/hl/data
+
+
+volumes:
+  hl-data:
+    driver: local

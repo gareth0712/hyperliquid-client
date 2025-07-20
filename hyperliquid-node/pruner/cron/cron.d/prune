@@ -1,0 +1,1 @@
+0 */1 * * * /bin/bash -c '/home/hluser/scripts/prune.sh' >> /tmp/cron.log 2>&1
